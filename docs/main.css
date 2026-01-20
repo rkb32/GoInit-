@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+}
+
+h1, h2 {
+    line-height: 2.2rem;
+}
+
+section {
+    padding: 50px 0;
+}
+
+section:nth-child(odd) {
+    background: #f0f0f0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+section:nth-child(odd) code {
+    background: #ddd;
+}
+
+table {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+th, td {
+    text-align: left;
+    padding: 15px;
+}
+
+th, tr:not(:last-of-type) td {
+    border-bottom: 1px solid #ccc;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.container:before, .container:after{
+    content: ' ';
+    display: table;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+pre {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 50px;
+    overflow: auto;
+    width: 800px;
+    margin-left: -100px;
+}
+
+code {
+    background: #eee;
+    color: #bb2c4f;
+    padding: 0 5px;
+}
+
+pre code {
+    background: initial !important;
+    color: initial;
+    padding: initial;
+}
+
+.text-right {
+    text-align: right;
+}
+
+section.hero {
+    padding: 100px 0;
+    background: #841443;
+    color: white;
+}
+
+.hero header {
+    color: white;
+}
+
+.hero h1 {
+    margin: 0;
+    margin-bottom: 50px;
+    font-size: 100px;
+}
+
+.hero strong {
+    font-weight: initial;
+    border-bottom: 2px solid white;
+}
+
+.hero ul {
+    line-height: 2rem;
+}
+
+.hero p {
+    color: #eee;
+}
+
+ul.checks {
+    list-style: none;
+}
+
+ul.checks li:before {
+    content: '\2713';
+    color: #00ff00;
+    margin-left: -20px;
+    margin-right: 10px;
+}
+
+.hero li {
+    padding: 3px 0;
+}
+
+.hero .star {
+    text-align: center;
+    padding: 15px 0;
+}
+
+@media (max-width: 800px) {
+    .container {
+	width: 100%;
+	padding: 0 15px;
+    }
+
+    pre {
+	width: 100%;
+	margin-left: 0;
+    }
+}
+
+@media (max-width: 411px) {
+    .hero h1 {
+	font-size: 75px;
+	margin: 15px 0;
+    }
+
+    .hero img {
+	display: none;
+    }
+}

@@ -1,0 +1,5 @@
+browser
+go.mod
+go.sum
+api
+*.db

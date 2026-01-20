@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run: dotnet publish -c release
+      - run: apt-get update -y && apt-get install -y sqlite3
+      - run: sqlite3 ./examples/notes/notes.db < ./examples/notes/sql/sqlite/schema.sql
+      - run: ./bin/release/netcoreapp3.0/linux-x64/publish/dbcore ./examples/notes
+      - persist_to_workspace:
+          root: ./examples
+          paths:
+            - notes
+
+  test_example_go_api:
+    docker:
+      - image: golang:1
+    working_directory: /tmp/notes/api
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/
+      # CircleCI is weird.
+      - run: rm -rf templates
+      - run: sh ./scripts/post-generate.sh
+      - run: go build cmd/main.go
+
+  test_example_react_browser:
+    docker:
+      - image: node:lts
+    working_directory: /tmp/notes/browser
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/
+      - run: sh ./scripts/post-generate.sh
+      - run: yarn typecheck
+      - run: yarn build
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+      - test_example_go_api:
+          requires:
+            - build
+      - test_example_react_browser:
+          requires:
+            - build
